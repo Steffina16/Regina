@@ -354,3 +354,90 @@ body::before {
     color: white;
 }
 
+/* ===== Responsive Enhancements ===== */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+
+    .gallery-container {
+        padding: 25px 15px;
+    }
+
+    .category-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .photo-frame {
+        padding-bottom: 100%;
+    }
+
+    .photo-overlay i {
+        font-size: 2rem;
+    }
+
+    .pagination button {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .category-title {
+        font-size: 1.8rem;
+    }
+
+    .back-btn {
+        font-size: 0.85rem;
+        padding: 8px 18px;
+    }
+
+    .pagination {
+        gap: 6px;
+    }
+
+    .pagination button {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .category-title {
+        font-size: 1.6rem;
+    }
+
+    .back-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    .photo-frame {
+        padding-bottom: 90%;
+    }
+
+    .photo-overlay i {
+        font-size: 1.8rem;
+    }
+
+    .pagination button {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+}
