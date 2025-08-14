@@ -10,62 +10,46 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" data-target="videos">Videos</a>
-        <a href="#" data-target="message"class="active-link">My message</a>
-        <a href="#" data-target="pictures">Pictures</a>
-        <a href="#" data-target="quiz">Quiz</a> <!-- Added Quiz link -->
+    <a href="#" data-target="videos">Videos</a>
+
+    <!-- Messages dropdown (click to open) -->
+    <div class="dropdown">
+        <button type="button" class="dropbtn">Message Menu </button>
+        <div class="dropdown-content">
+        <a href="index/birthday.html">Birthday Message</a> 
+        <!-- Add more pages here later -->
+        </div>
+    </div>
+
+    <a href="#" data-target="pictures">Pictures</a>
+    <a href="#" data-target="quiz">Quiz</a>
     </nav>
+
+<section id="home" class="content-section active-section">
+    <div class="gallery-container" style="position: relative; text-align: center; height: 500px; overflow: hidden;">
+        <!-- Slideshow images will be injected here by JS -->
+        <div id="slideshow-text" style="
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            color: #d23c67;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px 0;
+            z-index: 2; /* Make sure text is above the image */
+        ">
+            This is where we can see the memories we've made throughout the years 💖
+        </div>
+    </div>
+</section>
+
 
     <!-- Videos Section -->
     <section id="videos" class="content-section">
         <div class="video-container">
             <h1>Special Videos</h1>
-            <p>Video collection coming soon...</p>
-        </div>
-    </section>
-
-     <!-- Message Section -->
-    <section id="message" class="content-section active-section">
-        <div class="message-container">
-            <h1 class="message-header">Happy 18th Birthday, Regina! <span class="heart">♥</span></h1>
-            
-            <div class="message-content">
-                <p>Hello! First of all, happy birthday! How old are you now? Wow, it's been like 2 years that I've waited for this opportunity, and I decided that I should make my message into a code because I'm an I.T., and it's supposed to be special, especially how I pranked you. Do you remember? I said, "Can you help me with the design of this?" and I wanted to have your photos and videos. Well, it's a prank! I used it so I can use the photos for the edits and for this birthday surprise for you. Now, here you go hehe, I love you!</p>
-                
-                <p>Why am I speaking in English? I don't even know. I don't know if I would use ChatGPT here because I want to make my message sincere and not "AI-generated," but I'm trying my best to translate my message without the symbols like ", ? !"... because you know I'm bad at grammar. But at least it's a message that I tried to show you how I feel.</p>
-                
-                <p>But yeah, try to understand, po. I want to say it in Tagalog, but I want to make it special hehe. So many arte, right? But I guess it's time for my real speech.</p>
-                
-                <p>Well... happy birthday, Regina! That's all. Mwa, ilu—nah, I'm just kidding. I'm thinking if this message will fit in the code, but I'll try anyways. Here you go, Regina!</p>
-                
-                <p>Happy 18th birthday from your most handsome boyfriend in the world! Yes, we have our ups and downs, but I'm happy to say that you're finally a Kadiwa! Yey! I don't need to hide my goofiness or my "being a haruter," but enough with the silliness.</p>
-                
-                <p>I just wanted to say that I'm happy that I was your first boyfriend to experience different kinds of experiences with you, even though I made a lot of mistakes that I'm honest about, and I won't deny it with you.</p>
-                
-                <p>But why are we going to talk about negatives? Let's talk about positives, right?</p>
-                
-                <p>To be honest, this message is a story of how my preparation of making this gift since July 28, 2025. I was having a hard time thinking about what to gift you, especially yk... lack of money.</p>
-                
-                <p>But anyways, look how my message takes jumps and jumps because I'm making this at 2:44 AM lol, and I'm talking with you currently on Messenger. How cool is that?</p>
-                
-                <p>But ye, I hope you enjoy what I've made for you in this message and the other photos and edits that I will do, because this is the other way I want to express my love for you.</p>
-                
-                <p>I want to say a lot of things, but I'm sure before your birthday I will tell a lot of stories—maybe even spoil you this message before your birthday! "I hope not!" because I'm so eager to tell you my present. I'm not the type of person who wants to keep my surprises, and I want to show my progress sooner. But oh well, I guess I'll try to hide it from you hehe.</p>
-                
-                <p>Anyways, I wish that our relationship will still be stronger until the very end. I hope I could be your first and last "sincere boyfriend that you ever had," and I hope you could accept me inside and out without having negative thoughts of me.</p>
-                
-                <p>You would think I would cheat on you? I hope you won't think of that again. I mean, you have the rights to think of that, but I'm trying to say that I hope you just say it as a joke or something, or to annoy me. I hope you can trust me this time.</p>
-                
-                <p>For my final message, love, let's forget about the past, and let's be our new selves—like a new humble beginning under God's fate in the Church of Christ.</p>
-                
-                <p>And I wish that you'll stay in your church duties and be with me for the rest of our life. That's all.</p>
-            </div>
-            
-            <div class="signature">
-                I love you, Regina, sister, soon-to-be Regina Dela Cruz.<br>
-                Happy 18th birthday! I love you so much.<br>
-                – Stephen
-            </div>
+      
         </div>
     </section>
 
