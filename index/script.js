@@ -1,54 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-// ===== Homepage Slideshow =====
-const slideshowContainer = document.querySelector('#home .gallery-container');
-if (slideshowContainer) {
-    const slideshowText = document.getElementById('slideshow-text');
+const slideshowWrapper = document.getElementById('slideshow-wrapper');
 
-    // Generate array of image paths dynamically (228 images)
-    const totalImages = 228;
-    const imagePaths = [];
-    for (let i = 1; i <= totalImages; i++) {
-        const numStr = String(i).padStart(3, '0'); // pad 001, 002, etc.
-        imagePaths.push(`albums/picture/picture ni chin-${numStr}.jpg`);
-    }
-
-    // Shuffle images randomly
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-    shuffle(imagePaths);
-
-    // Create img element
-    const imgElement = document.createElement('img');
-    imgElement.style.width = '100%';
-    imgElement.style.height = '500px';
-    imgElement.style.objectFit = 'cover';
-    imgElement.style.transition = 'opacity 1s ease-in-out';
-    imgElement.style.position = 'absolute';
-    imgElement.style.top = '0';
-    imgElement.style.left = '0';
-    imgElement.style.opacity = '0';
-    imgElement.style.zIndex = '1';
-    slideshowContainer.appendChild(imgElement);
-
-    let currentIndex = 0;
-
-    function showNextImage() {
-        imgElement.style.opacity = '0';
-        setTimeout(() => {
-            imgElement.src = imagePaths[currentIndex];
-            imgElement.style.opacity = '1';
-            currentIndex = (currentIndex + 1) % imagePaths.length;
-        }, 500);
-    }
-
-    showNextImage();
-    setInterval(showNextImage, 5000); // change every 5 seconds
+const imagePaths = [];
+for (let i = 1; i <= 228; i++) {
+    const formattedNumber = String(i).padStart(3, '0'); 
+    imagePaths.push(`albums/picture/picture ni chin-${formattedNumber}.jpg`);
 }
+
+// Shuffle the images array for randomness
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+shuffle(imagePaths);
+
+let currentIndex = 0;
+
+function showNextSlide() {
+    slideshowWrapper.innerHTML = ''; // clear previous images
+
+    for (let i = 0; i < 3; i++) {
+        const imgIndex = (currentIndex + i) % imagePaths.length;
+        const imgElement = document.createElement('img');
+        imgElement.src = imagePaths[imgIndex];
+        imgElement.style.flex = '1';
+        imgElement.style.width = '33.33%';
+        imgElement.style.height = '100%';
+        imgElement.style.objectFit = 'cover';
+        imgElement.style.transition = 'opacity 0.5s ease-in-out';
+        slideshowWrapper.appendChild(imgElement);
+    }
+
+    currentIndex = (currentIndex + 3) % imagePaths.length;
+}
+
+// Start slideshow
+showNextSlide();
+setInterval(showNextSlide, 5000); // change every 5 seconds
 
     // ===== Dropdown toggle =====
 const dropBtn = document.querySelector(".dropbtn");
