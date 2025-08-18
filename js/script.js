@@ -2,21 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const slideshowWrapper = document.getElementById('slideshow-wrapper');
 
-const imagePaths = [];
+// Load images from both folders
+const folder1 = [];
+for (let i = 1; i <= 4; i++) {
+    const num = String(i).padStart(3, '0');
+    folder1.push(`albums/ourpicture/Ourpicture-${num}.jpg`);
+}
+const folder2 = [];
 for (let i = 1; i <= 228; i++) {
-    const formattedNumber = String(i).padStart(3, '0'); 
-    imagePaths.push(`albums/picture/picture ni chin-${formattedNumber}.jpg`);
+    const num = String(i).padStart(3, '0');
+    folder2.push(`albums/picture/picture ni chin-${num}.jpg`);
 }
 
-// Shuffle the images array for randomness
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-shuffle(imagePaths);
+// Combine and shuffle
+let imagePaths = [...folder1, ...folder2];
+imagePaths = imagePaths.sort(() => Math.random() - 0.5);
 
 let currentIndex = 0;
 
@@ -38,9 +38,10 @@ function showNextSlide() {
     currentIndex = (currentIndex + 3) % imagePaths.length;
 }
 
-// Start slideshow
+// Start the slideshow
 showNextSlide();
-setInterval(showNextSlide, 5000); // change every 5 seconds
+setInterval(showNextSlide, 5000);
+
 
     // ===== Dropdown toggle =====
 const dropBtn = document.querySelector(".dropbtn");

@@ -1,5 +1,5 @@
 const imagesPerPage = 20;
-const totalImages = 228;
+const totalImages = 2;
 
 const gallery = document.getElementById("gallery");
 const pagination = document.getElementById("pagination");
@@ -15,11 +15,11 @@ function loadImages(page) {
 
     for (let i = start; i <= end; i++) {
         const imageNumber = formatNumber(i);
-        const imgPath = `picture/picture ni chin-${imageNumber}.jpg`;
+        const imgPath = `../albums/Funnypic/Chin-${imageNumber}.jpg`;
 
         const img = document.createElement("img");
         img.src = imgPath;
-        img.alt = `picture ni chin ${imageNumber}`;
+        img.alt = `Chin ${imageNumber}`;
 
         const wrapper = document.createElement("div");
         wrapper.className = "photo";

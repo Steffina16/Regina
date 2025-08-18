@@ -1,5 +1,5 @@
 const imagesPerPage = 20;
-const totalImages = 3;
+const totalImages = 6;
 
 const gallery = document.getElementById("gallery");
 const pagination = document.getElementById("pagination");
@@ -15,7 +15,7 @@ function loadImages(page) {
 
     for (let i = start; i <= end; i++) {
         const imageNumber = formatNumber(i);
-        const imgPath = `ourpicture/Ourpicture-${imageNumber}.jpg`;
+        const imgPath = `../albums/ourpicture/Ourpicture-${imageNumber}.jpg`;
 
         const img = document.createElement("img");
         img.src = imgPath;
