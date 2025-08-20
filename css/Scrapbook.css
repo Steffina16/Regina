@@ -1,0 +1,289 @@
+/* ===== CSS Variables ===== */
+:root {
+  --pink-50: #fff7fb;
+  --pink-100: #ffe9f1;
+  --pink-200: #ffd6e3;
+  --pink-300: #ffbfd3;
+  --pink-400: #ff9fbf;
+  --pink-500: #ff7aa8;
+  --rose-600: #d23c67;
+  --ink: #4a4a4a;
+  --paper: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+}
+
+/* ===== Base Styles ===== */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: 
+    radial-gradient(1200px 800px at 10% -10%, #fff0f6 10%, transparent 40%),
+    radial-gradient(1200px 800px at 110% 10%, #fff1f7 10%, transparent 40%),
+    linear-gradient(180deg, var(--pink-50), #fff);
+  min-height: 100vh;
+  padding: var(--space-md);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: min(1200px, 90%);
+  margin: 0 auto;
+}
+
+/* ===== Ribbon ===== */
+.ribbon {
+  position: relative;
+  background: linear-gradient(135deg, var(--pink-200), var(--pink-300));
+  color: var(--rose-600);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+  text-align: center;
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+}
+
+.ribbon:before, .ribbon:after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(60px, 8vw, 90px);
+  background: repeating-linear-gradient(45deg, #ffd3e3, #ffd3e3 10px, #ffe6f0 10px, #ffe6f0 20px);
+  opacity: .5;
+  filter: blur(1px);
+}
+
+.ribbon:before { left: -40px; transform: skewX(-12deg); }
+.ribbon:after { right: -40px; transform: skewX(12deg); }
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  margin: 0;
+  letter-spacing: .5px;
+  text-shadow: 0 2px 0 rgba(255,255,255,.8);
+}
+
+.subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  margin: var(--space-xs) 0 0;
+  color: #ad2f56;
+}
+
+/* ===== Polaroid Grid - Perfect 3-2-3 Layout ===== */
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+/* First Row */
+.polaroid:nth-child(1) { grid-area: 1 / 1; }
+.polaroid:nth-child(2) { grid-area: 1 / 2; }
+.polaroid:nth-child(3) { grid-area: 1 / 3; }
+
+/* ===== Middle Row Adjustments ===== */
+.polaroid:nth-child(4) { 
+  grid-area: 2 / 1 / span 1 / span 1;  /* Left middle */
+  justify-self: end;                   /* Push right */
+  margin-right: 8px;                   /* Gap between them */
+}
+
+.polaroid:nth-child(5) { 
+  grid-area: 2 / 3 / span 1 / span 1;  /* Right middle */
+  justify-self: start;                 /* Push left */
+  margin-left: 8px;                    /* Gap between them */
+}
+
+/* Bottom Row */
+.polaroid:nth-child(6) { grid-area: 3 / 1; }
+.polaroid:nth-child(7) { grid-area: 3 / 2; }
+.polaroid:nth-child(8) { grid-area: 3 / 3; }
+
+/* Polaroid Styling */
+.polaroid {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: var(--space-sm);
+  box-shadow: var(--shadow);
+  position: relative;
+  transform: rotate(var(--tilt, -1.5deg));
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.polaroid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+}
+
+.polaroid:hover img {
+  transform: scale(1.03);
+}
+
+/* Special Polaroids */
+.polaroid.wide { 
+  grid-column: span 2 !important;
+}
+.polaroid.wide img {
+  height: 240px;
+}
+
+.polaroid.tall img {
+  height: 280px;
+}
+
+/* Tape and Caption */
+.polaroid .tape {
+  position: absolute;
+  top: -10px; left: 22px;
+  width: 70px; height: 22px;
+  background: #ffe1eb;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.05);
+  transform: rotate(-6deg);
+  opacity: .9;
+}
+
+.polaroid .caption {
+  margin: var(--space-xs) 0 0;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: var(--rose-600);
+}
+
+/* ===== Notes Section ===== */
+.notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.note {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.9)),
+    repeating-linear-gradient(180deg, transparent 0 26px, rgba(255,182,193,.35) 26px 28px);
+  backdrop-filter: blur(2px);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: var(--space-sm);
+  position: relative;
+}
+
+.note::after {
+  content: "";
+  position: absolute;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--rose-600);
+  top: 12px; right: 12px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.15);
+}
+
+.note h3 {
+  margin: 0 0 var(--space-xs);
+  color: var(--rose-600);
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6rem;
+}
+
+.stickers {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  margin-top: var(--space-xs);
+}
+
+.sticker {
+  font-size: 1.4rem;
+  padding: 4px 10px;
+  background: var(--pink-200);
+  border: 1px dashed #ffb3c6;
+  border-radius: 999px;
+}
+
+/* ===== Footer & Button ===== */
+.footer {
+  text-align: center;
+  margin-top: var(--space-md);
+  color: #a0526c;
+  font-family: 'Playfair Display', serif;
+}
+
+.return-btn {
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+.return-btn a {
+  display: inline-block;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, var(--pink-300), var(--pink-400));
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: all 0.25s ease;
+}
+
+.return-btn a:hover {
+  background: linear-gradient(135deg, var(--pink-400), var(--rose-600));
+  transform: translateY(-2px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .polaroid-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: none;
+  }
+  
+  .polaroid {
+    grid-area: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .polaroid img {
+    height: 200px;
+  }
+  
+  .polaroid.wide img {
+    height: 220px;
+  }
+  
+  .polaroid.tall img {
+    height: 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: var(--space-sm);
+  }
+  
+  .polaroid-grid,
+  .notes {
+    grid-template-columns: 1fr;
+  }
+  
+  .polaroid img {
+    height: 220px;
+  }
+}

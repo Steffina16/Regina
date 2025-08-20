@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Love! • Scrapbook</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/Scrapbook.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header / Cover -->
+    <header class="ribbon">
+      <h1 class="title">Happy 18th Birthday, Regina! ✨</h1>
+      <p class="subtitle">A little scrapbook of our sweetest memories</p>
+    </header>
+
+    <!-- Polaroid Collage Page -->
+    <section class="page" id="photos">
+      <div class="polaroid-grid">
+        <!-- Row 1 -->
+        <article class="polaroid" style="--tilt:-2deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-005.jpg" alt="Us together" />
+          <p class="caption">insert. 💞</p>
+        </article>
+
+        <article class="polaroid tall" style="--tilt:1.5deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-001.jpg" alt="Solo" />
+          <p class="caption">Insert.</p>
+        </article>
+
+        <article class="polaroid wide" style="--tilt:-1deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-006.jpg" alt="Candid" />
+          <p class="caption">insert.</p>
+        </article>
+
+        <!-- Row 2 (Middle) -->
+        <article class="polaroid middle-row" style="--tilt:2deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-002.jpg" alt="Memory" />
+          <p class="caption">Coffee + talks ☕️</p>
+        </article>
+
+        <article class="polaroid middle-row" style="--tilt:-2deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-003.jpg" alt="Memory" />
+          <p class="caption"> Sangyup🥓</p>
+        </article>
+
+        <article class="polaroid middle-row" style="--tilt:1deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-004.jpg" alt="Memory" />
+          <p class="caption">insert.</p>
+        </article>
+
+        <!-- Row 3 -->
+        <article class="polaroid" style="--tilt:-1deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-007.jpg" alt="New Photo 1" />
+          <p class="caption">New memory 💫</p>
+        </article>
+
+        <article class="polaroid" style="--tilt:1.5deg">
+          <span class="tape"></span>
+          <img src="../albums/Scrapbook/Ourpicture-008.jpg" alt="New Photo 2" />
+          <p class="caption">Another moment 🌸</p>
+        </article>
+
+        <!-- New 9th Polaroid -->
+        <article class="polaroid" style="--tilt:0.5deg">
+          <span class="tape"></span>
+          <img src="" alt="Extra memory" />
+          <p class="caption">Special day ✨</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Rest of your HTML remains exactly the same -->
+    <section class="page" id="notes">
+      <div class="notes">
+        <article class="note">
+          <h3>Birthday Wish</h3>
+          <p>
+           I pray na maliban sa matupad wish mo, sana araw araw safe ka kayanin mo tungkulin mo, higit sa lahat mag stay ka sa pagiging iglesia ni cristo💗
+          </p>
+          <div class="stickers">
+            <span class="sticker">🎂</span>
+            <span class="sticker">💖</span>
+            <span class="sticker">🌸</span>
+          </div>  
+        </article>
+
+        <article class="note">
+          <h3>Favorite Memory</h3>
+          <p>
+            Favorite Moment ko siguro yung may kasalanan ako sayo pero nung pinakita ko lng toh gift ko sayo nawala nagalit mo saken tapos nag lalaro tayo ng 2 player games hehe
+          </p>
+          <div class="stickers">
+            <span class="sticker">🏸</span>
+            <span class="sticker">🫶</span>
+            <span class="sticker">📸</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <p class="footer">Made with love • And Code </p>
+
+    <div class="return-btn">
+      <a href="../index.html#pictures">⬅ Return</a>
+    </div>
+  </div>
+
+  <script>
+    // Scrapbook tilt randomizer
+    document.querySelectorAll('.polaroid').forEach((card, i) => {
+      if (!card.style.getPropertyValue('--tilt')) {
+        const tilt = (Math.random() * 4 - 2).toFixed(1); 
+        card.style.setProperty('--tilt', tilt + 'deg');
+      }
+    });
+  </script>
+</body>
+</html>
