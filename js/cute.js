@@ -1,5 +1,5 @@
 const imagesPerPage = 20;
-const totalImages = 2;
+const totalImages = 6;
 
 const gallery = document.getElementById("gallery");
 const pagination = document.getElementById("pagination");
