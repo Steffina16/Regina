@@ -1,48 +1,74 @@
+// Solo.js
 const imagesPerPage = 20;
-const totalImages = 242;
-
 const gallery = document.getElementById("gallery");
 const pagination = document.getElementById("pagination");
 
-function formatNumber(num) {
-    return num.toString().padStart(3, '0'); // 001, 002, etc.
-}
+// Create image elements for all images from the PHP array
+images.forEach((imagePath, index) => {
+  // Create the photo container with the correct class structure
+  const photoDiv = document.createElement("div");
+  photoDiv.className = "photo";
+  
+  // Create the frame div
+  const frameDiv = document.createElement("div");
+  frameDiv.className = "photo-frame";
+  
+  // Create the image element
+  const img = document.createElement("img");
+  img.src = imagePath;
+  img.alt = "Solo Glamour Image " + (index + 1);
+  
+  // Create the overlay div
+  const overlayDiv = document.createElement("div");
+  overlayDiv.className = "photo-overlay";
+  
+  // Add the heart icon to the overlay
+  const heartIcon = document.createElement("i");
+  heartIcon.className = "fas fa-heart";
+  overlayDiv.appendChild(heartIcon);
+  
+  // Assemble the structure
+  frameDiv.appendChild(img);
+  photoDiv.appendChild(frameDiv);
+  photoDiv.appendChild(overlayDiv);
+  
+  // Add to gallery
+  gallery.appendChild(photoDiv);
+});
 
-function loadImages(page) {
-    gallery.innerHTML = "";
-    const start = (page - 1) * imagesPerPage + 1;
-    const end = Math.min(start + imagesPerPage - 1, totalImages);
+// Get all photo elements after creating them
+const allPhotos = Array.from(gallery.querySelectorAll(".photo"));
+const totalPhotos = allPhotos.length;
 
-    for (let i = start; i <= end; i++) {
-        const imageNumber = formatNumber(i);
-        const imgPath = `../albums/picture/picture ni chin-${imageNumber}.jpg`;
+function showPage(page) {
+  const start = (page - 1) * imagesPerPage;
+  const end = start + imagesPerPage;
 
-        const img = document.createElement("img");
-        img.src = imgPath;
-        img.alt = `picture ni chin ${imageNumber}`;
-
-        const wrapper = document.createElement("div");
-        wrapper.className = "photo";
-        wrapper.appendChild(img);
-
-        gallery.appendChild(wrapper);
+  allPhotos.forEach((photo, index) => {
+    if (index >= start && index < end) {
+      photo.style.display = "block";
+    } else {
+      photo.style.display = "none";
     }
+  });
 
-    renderPagination(page);
+  renderPagination(page);
 }
 
 function renderPagination(currentPage) {
-    pagination.innerHTML = "";
+  pagination.innerHTML = "";
+  const totalPages = Math.ceil(totalPhotos / imagesPerPage);
 
-    const totalPages = Math.ceil(totalImages / imagesPerPage);
-    for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement("button");
-        btn.textContent = i;
-        if (i === currentPage) btn.classList.add("active");
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
 
-        btn.addEventListener("click", () => loadImages(i));
-        pagination.appendChild(btn);
-    }
+    if (i === currentPage) btn.classList.add("active");
+
+    btn.addEventListener("click", () => showPage(i));
+    pagination.appendChild(btn);
+  }
 }
 
-loadImages(1);
+// Initialize the gallery
+showPage(1);
