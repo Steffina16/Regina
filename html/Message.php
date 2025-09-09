@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
   <link rel="icon" type="image/x-icon" href="index/placeholder/logo.png">
+
+  <?php include '../sidebar.php'; ?>
+
 </head>
 <body>
   <nav class="navbar">

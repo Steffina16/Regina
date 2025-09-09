@@ -10,6 +10,7 @@
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
   <!-- Styles -->
   <link rel="stylesheet" href="../css/Scrapbook.css" />
+  <?php include '../sidebar.php'; ?>
 </head>
 <body>
   <div class="container">

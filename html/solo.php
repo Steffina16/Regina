@@ -13,6 +13,9 @@ $files = array_values($files); // reindex array
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap">
   <link rel="stylesheet" href="../css/album.css">
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
+
+    <?php include '../sidebar.php'; ?>
+
 </head>
 <body>
   <div class="gallery-container">

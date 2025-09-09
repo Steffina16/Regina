@@ -15,10 +15,13 @@ $files = array_values($files); // reindex array
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
 </head>
 <body>
+  <!-- Sidebar include -->
+  <?php include '../sidebar.php'; ?>
+
   <div class="gallery-container">
     <a href="../index.html#pictures" class="back-btn">← Back to Main</a>
     <div class="album-container">
-      <h2 class="category-title">Solo Glamour ✨</h2>
+      <h2 class="category-title">Our Picture ✨</h2>
 
       <!-- Gallery and pagination containers -->
       <div class="gallery" id="gallery"></div>

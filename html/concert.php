@@ -6,6 +6,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/concert.css">
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
+  <?php include '../sidebar.php'; ?>
 </head>
 <body>
   <div class="scrapbook">
