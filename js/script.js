@@ -1,65 +1,66 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-const slideshowWrapper = document.getElementById('slideshow-wrapper');
+    const slideshowWrapper = document.getElementById('slideshow-wrapper');
 
-// Load images from both folders
-const folder1 = [];
-for (let i = 1; i <= 4; i++) {
-    const num = String(i).padStart(3, '0');
-    folder1.push(`albums/ourpicture/Ourpicture-${num}.jpg`);
-}
-const folder2 = [];
-for (let i = 1; i <= 228; i++) {
-    const num = String(i).padStart(3, '0');
-    folder2.push(`albums/picture/picture ni chin-${num}.jpg`);
-}
-
-// Combine and shuffle
-let imagePaths = [...folder1, ...folder2];
-imagePaths = imagePaths.sort(() => Math.random() - 0.5);
-
-let currentIndex = 0;
-
-function showNextSlide() {
-    slideshowWrapper.innerHTML = ''; // clear previous images
-
-    for (let i = 0; i < 3; i++) {
-        const imgIndex = (currentIndex + i) % imagePaths.length;
-        const imgElement = document.createElement('img');
-        imgElement.src = imagePaths[imgIndex];
-        imgElement.style.flex = '1';
-        imgElement.style.width = '33.33%';
-        imgElement.style.height = '100%';
-        imgElement.style.objectFit = 'cover';
-        imgElement.style.transition = 'opacity 0.5s ease-in-out';
-        slideshowWrapper.appendChild(imgElement);
+    // ===== Slideshow =====
+    const folder1 = [];
+    for (let i = 1; i <= 28; i++) {
+        const num = String(i).padStart(3, '0');
+        folder1.push(`albums/ourpicture/Ourpicture-${num}.jpg`);
     }
 
-    currentIndex = (currentIndex + 3) % imagePaths.length;
-}
+    const folder2 = [];
+    for (let i = 1; i <= 228; i++) {
+        const num = String(i).padStart(3, '0');
+        folder2.push(`albums/picture/picture ni chin-${num}.jpg`);
+    }
 
-// Start the slideshow
-showNextSlide();
-setInterval(showNextSlide, 5000);
+    const folder3 = [];
+    for (let i = 1; i <= 6; i++) {
+        const num = String(i).padStart(3, '0');
+        folder3.push(`albums/Funnypic/Chin-${num}.jpg`);
+    }
 
+    let imagePaths = [...folder1, ...folder2, ...folder3];
+    imagePaths = imagePaths.sort(() => Math.random() - 0.5);
+
+    let currentIndex = 0;
+
+    function showNextSlide() {
+        slideshowWrapper.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+            const imgIndex = (currentIndex + i) % imagePaths.length;
+            const imgElement = document.createElement('img');
+            imgElement.src = imagePaths[imgIndex];
+            imgElement.style.flex = '1';
+            imgElement.style.width = '33.33%';
+            imgElement.style.height = '100%';
+            imgElement.style.objectFit = 'cover';
+            imgElement.style.transition = 'opacity 0.5s ease-in-out';
+            slideshowWrapper.appendChild(imgElement);
+        }
+        currentIndex = (currentIndex + 3) % imagePaths.length;
+    }
+
+    showNextSlide();
+    setInterval(showNextSlide, 5000);
 
     // ===== Dropdown toggle =====
-const dropBtn = document.querySelector(".dropbtn");
-const dropdown = document.querySelector(".dropdown");
+    const dropBtn = document.querySelector(".dropbtn");
+    const dropdown = document.querySelector(".dropdown");
 
-if (dropBtn) {
-    dropBtn.addEventListener("click", function(e) {
-        e.stopPropagation();
-        dropdown.classList.toggle("show"); // toggle parent .dropdown
-    });
-}
-
-window.addEventListener("click", function(event) {
-    if (!event.target.closest(".dropdown")) {
-        dropdown.classList.remove("show");
+    if (dropBtn) {
+        dropBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("show");
+        });
     }
-});
 
+    window.addEventListener("click", function(event) {
+        if (!event.target.closest(".dropdown")) {
+            dropdown.classList.remove("show");
+        }
+    });
 
     // ===== SPA Navigation =====
     const navLinks = document.querySelectorAll('.navbar a[data-target]');
@@ -99,9 +100,17 @@ window.addEventListener("click", function(event) {
         });
     });
 
-    // Load section if hash exists
     const initialHash = window.location.hash.replace('#', '');
     if (initialHash) showSection(initialHash);
+
+    // ===== Allow normal navigation for dropdown links =====
+    const dropdownLinks = document.querySelectorAll('.dropdown-content a');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            dropdown.classList.remove('show'); // close dropdown
+            // normal navigation happens automatically
+        });
+    });
 
     // ===== Pictures =====
     function initializePictureCategories() {

@@ -15,20 +15,24 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
 
-    // Define target directories based on category
+      // Define target directories based on category
     switch ($category) {
         case "solo":
-            $prefix = "picture-ni-Chin-";
+            $prefix = "picture ni chin-";
             $targetDir = "albums/picture/"; 
             break;
         case "couple":
-            $prefix = "Ouricture-";
+            $prefix = "Ourpicture-";
             $targetDir = "albums/ourpicture/"; 
             break;
         case "cute":
             $prefix = "Chin-";
             $targetDir = "albums/Funnypic/"; 
             break;
+        case "food":
+            $prefix = "food-";
+            $targetDir = "albums/foods/"; 
+            break;    
         default:
             $prefix = "Image-";
             $targetDir = "albums/";
@@ -85,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="solo">Solo</option>
                 <option value="couple">Couple</option>
                 <option value="cute">Cute</option>
+                <option value="food">Foods</option>
             </select>
 
             <label for="image">Select Image:</label>

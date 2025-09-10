@@ -44,8 +44,8 @@
     <!-- Bottom row of pictures -->
     <div class="row">
       <div class="photo">
-        <img src="images/bottom1.jpg" alt="Bottom Photo 1">
-        <p>di ko alam lalagay wala food ticket pic </p>
+        <img src="../albums/concert/concertbotleft.jpg" alt="Bottom Photo 1">
+        <p> Foodie 🍽️❤️ </p>
       </div>
       <div class="photo">
         <img src="../albums/concert/concertbot.jpg" alt="Bottom Photo 2">
