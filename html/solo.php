@@ -14,8 +14,7 @@ $files = array_values($files); // reindex array
   <link rel="stylesheet" href="../css/album.css">
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
 
-    <?php include '../sidebar.php'; ?>
-
+  <?php include '../sidebar.php'; ?>
 </head>
 <body>
   <div class="gallery-container">
@@ -36,12 +35,17 @@ $files = array_values($files); // reindex array
     <div class="heart">❤️</div>
   </div>
 
+  <!-- Lightbox overlay (for zoom effect) -->
+  <div id="lightbox" class="lightbox">
+    <img id="lightbox-img" src="" alt="Zoomed Image">
+  </div>
+
   <!-- pass PHP list to JS -->
   <script>
     const images = <?php echo json_encode($files); ?>;
   </script>
 
   <!-- include your JS (use the same filename / path your project references) -->
-  <script src="../js/Solo.js"></script>
+  <script src="../js/solo.js"></script>
 </body>
 </html>

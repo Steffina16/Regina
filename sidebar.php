@@ -30,7 +30,7 @@
     </a>
     <a href="#" id="toggle-music">
     <div class="left">
-      <i id="musicIcon" class="fas fa-music"></i> Background Music
+      <i id="musicIcon" class="fas fa-music"></i> Soundtrack
     </div>
     <span class="toggle" id="musicStatus">OFF</span>
   </a>

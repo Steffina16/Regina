@@ -36,6 +36,11 @@ $files = array_values($files); // reindex array
     <div class="heart">❤️</div>
   </div>
 
+  <div id="lightbox" class="lightbox">
+  <img id="lightbox-img" src="" alt="Enlarged Image">
+  </div>
+
+
   <!-- pass PHP list to JS -->
   <script>
     const images = <?php echo json_encode($files); ?>;
