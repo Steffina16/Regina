@@ -36,10 +36,10 @@ $files = array_values($files); // reindex array
     <div class="heart">❤️</div>
   </div>
 
-  <div id="lightbox" class="lightbox">
-  <img id="lightbox-img" src="" alt="Enlarged Image">
+  <!-- Single Lightbox -->
+  <div id="lightbox">
+      <img id="lightbox-img" src="" alt="Enlarged Image">
   </div>
-
 
   <!-- pass PHP list to JS -->
   <script>

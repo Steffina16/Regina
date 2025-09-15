@@ -35,10 +35,10 @@ $files = array_values($files); // reindex array
     <div class="heart">❤️</div>
     <div class="heart">❤️</div>
   </div>
-  
-   <!-- Lightbox overlay (for zoom effect) -->
-  <div id="lightbox" class="lightbox">
-    <img id="lightbox-img" src="" alt="Zoomed Image">
+
+  <!-- Single Lightbox -->
+  <div id="lightbox">
+      <img id="lightbox-img" src="" alt="Enlarged Image">
   </div>
 
   <!-- pass PHP list to JS -->

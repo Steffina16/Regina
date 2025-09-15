@@ -57,6 +57,11 @@
       </div>
     </div>
 
+        <!-- Lightbox overlay -->
+    <div id="concert-lightbox">
+      <img id="concert-lightbox-img" src="" alt="Enlarged Image">
+    </div>
+
     <p class="caption">A scrapbook of music & memories 💖</p>
   </div>
 
