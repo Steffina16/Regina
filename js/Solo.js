@@ -2,6 +2,17 @@ const imagesPerPage = 20;
 const gallery = document.getElementById("gallery");
 const pagination = document.getElementById("pagination");
 
+// === SOUND SUPPORT START ===
+const clickSound = document.getElementById("clickSound");
+
+function playClickSound() {
+  if (localStorage.getItem("clickSoundEnabled") === "true" && clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  }
+}
+// === SOUND SUPPORT END ===
+
 // Store the image paths from PHP
 // const images = [...]; // already passed from PHP
 
@@ -16,6 +27,9 @@ function createPhotoElement(imagePath, index) {
   img.dataset.src = imagePath; // store path
   img.alt = "Solo Glamour Image " + (index + 1);
   img.loading = "lazy";
+
+  // 🔊 Add sound on click
+  img.addEventListener("click", playClickSound);
 
   const overlayDiv = document.createElement("div");
   overlayDiv.className = "photo-overlay";
@@ -60,7 +74,11 @@ function renderPagination(currentPage) {
     btn.textContent = i;
     if (i === currentPage) btn.classList.add("active");
 
-    btn.addEventListener("click", () => showPage(i));
+    btn.addEventListener("click", () => {
+      playClickSound(); // 🔊 sound when switching pages
+      showPage(i);
+    });
+
     pagination.appendChild(btn);
   }
 }

@@ -72,31 +72,110 @@ document.addEventListener("DOMContentLoaded", () => {
       col = col.slice(1);
       usePound = true;
     }
-    let num = parseInt(col,16);
+    let num = parseInt(col, 16);
     let r = (num >> 16) + amt;
     let g = ((num >> 8) & 0x00FF) + amt;
     let b = (num & 0x0000FF) + amt;
-    r = Math.min(255, Math.max(0,r));
-    g = Math.min(255, Math.max(0,g));
-    b = Math.min(255, Math.max(0,b));
-    return (usePound?"#":"") + ((r<<16) | (g<<8) | b).toString(16).padStart(6,'0');
+    r = Math.min(255, Math.max(0, r));
+    g = Math.min(255, Math.max(0, g));
+    b = Math.min(255, Math.max(0, b));
+    return (usePound ? "#" : "") + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
   }
 
-  function applyThemeColor(color){
+  function applyThemeColor(color) {
     document.documentElement.style.setProperty('--accent-color', color);
 
-    // Light/dark variants for gradient
-    const start = lightenDarkenColor(color, 60); // lighter tint
-    const end = lightenDarkenColor(color, -10);  // slightly darker
+    const start = lightenDarkenColor(color, 60);
+    const end = lightenDarkenColor(color, -10);
     document.documentElement.style.setProperty('--bg-color-start', start);
     document.documentElement.style.setProperty('--bg-color-end', end);
 
-    // Optional: set sidebar light for light mode, dark for dark mode
-    if(document.body.classList.contains("dark")){
+    if (document.body.classList.contains("dark")) {
       document.documentElement.style.setProperty('--sidebar-bg', 'rgba(50, 30, 50, 0.85)');
     } else {
       document.documentElement.style.setProperty('--sidebar-bg', '#fff');
     }
   }
+
+  // === Click Sound Toggle ===
+  const soundLink = document.getElementById("toggle-sound");
+  const soundStatus = document.getElementById("soundStatus");
+  const clickSound = document.getElementById("click-sound");
+
+  function updateSoundStatus(enabled) {
+    if (enabled) {
+      soundIcon.classList.replace("fa-volume-mute", "fa-volume-up");
+      soundStatus.textContent = "ON";
+    } else {
+      soundIcon.classList.replace("fa-volume-up", "fa-volume-mute");
+      soundStatus.textContent = "OFF";
+    }
+  }
+
+  // Load saved preference
+  function isSoundEnabled() {
+    return localStorage.getItem("soundEnabled") === "true";
+  }
+
+  updateSoundStatus(isSoundEnabled());
+
+  // Toggle when clicking sidebar link
+  if (soundLink) {
+    soundLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const nextState = !isSoundEnabled();
+      localStorage.setItem("soundEnabled", nextState);
+      updateSoundStatus(nextState);
+    });
+  }
+
+// Play sound on *every* click when enabled
+document.addEventListener("click", () => {
+  if (!isSoundEnabled() || !clickSound) return;
+
+  // Clone the audio node so overlapping clicks still play
+  const clone = clickSound.cloneNode();
+  clone.play().catch(() => {});
+
+});
+
+// === Background Music Toggle ===
+const musicLink = document.getElementById("toggle-music");
+const musicIcon = document.getElementById("musicIcon");
+const musicStatus = document.getElementById("musicStatus");
+const bgMusic = document.getElementById("bg-music");
+
+// Always start OFF
+localStorage.setItem("musicEnabled", "false");
+
+function isMusicEnabled() {
+  return localStorage.getItem("musicEnabled") === "true";
+}
+
+function updateMusicUI(enabled) {
+  if (enabled) {
+    musicIcon.classList.replace("fa-music", "fa-play-circle"); // change icon
+    musicStatus.textContent = "ON";
+    bgMusic.play().catch(() => {});
+  } else {
+    musicIcon.classList.replace("fa-play-circle", "fa-music"); // back to normal
+    musicStatus.textContent = "OFF";
+    bgMusic.pause();
+    bgMusic.currentTime = 0; // reset song
+  }
+}
+
+// Initialize UI to OFF
+updateMusicUI(false);
+
+// Toggle when clicking sidebar link
+if (musicLink) {
+  musicLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    const nextState = !isMusicEnabled();
+    localStorage.setItem("musicEnabled", nextState);
+    updateMusicUI(nextState);
+  });
+}
 
 });

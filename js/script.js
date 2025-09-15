@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const folder2 = [];
     for (let i = 1; i <= 228; i++) {
         const num = String(i).padStart(3, '0');
-        folder2.push(`albums/picture/picture ni chin-${num}.jpg`);
+        folder2.push(`albums/picture/picture-ni-chin-${num}.jpg`);
     }
 
     const folder3 = [];

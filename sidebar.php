@@ -28,19 +28,29 @@
     <a href="#" id="theme-trigger">
       <div class="left"><i class="fas fa-palette"></i> Theme Color</div>
     </a>
-    <a href="#">
-      <div class="left"><i class="fas fa-music"></i> Music</div>
-      <span class="toggle">OFF</span>
+    <a href="#" id="toggle-music">
+    <div class="left">
+      <i id="musicIcon" class="fas fa-music"></i> Background Music
+    </div>
+    <span class="toggle" id="musicStatus">OFF</span>
+  </a>
+
+    <!-- Hidden audio element -->
+    <audio id="bg-music" loop>
+      <source src="../sounds/song.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <a href="#" id="toggle-sound">
+      <div class="left">
+        <i id="soundIcon" class="fas fa-volume-up"></i> Click Sound
+      </div>
+      <span class="toggle" id="soundStatus">ON</span>
     </a>
-    <a href="#">
-      <div class="left"><i class="fas fa-volume-up"></i> Click Sound</div>
-      <span class="toggle">OFF</span>
-    </a>
-    <a href="#">
-      <div class="left"><i class="fas fa-bolt"></i> Lazy Load</div>
-      <span class="toggle">OFF</span>
-    </a>
-  </div>
+
+    <!-- Hidden audio element -->
+    <audio id="click-sound" src="../sounds/click.ogg" preload="auto"></audio>
+    </div>
 
   <!-- Theme color modal -->
   <div id="themeModal" class="theme-modal">
