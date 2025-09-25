@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Define target directories based on category
     switch ($category) {
         case "solo":
-            $prefix = "picture ni chin-";
+            $prefix = "picture-ni-chin-";
             $targetDir = "albums/picture/"; 
             break;
         case "couple":
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
   <div class="upload-container">
-      <a href="index.html#pictures" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+      <a href="index.php#pictures" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
       <h2 class="title"><i class="fas fa-cloud-upload-alt"></i> Upload Your Memory</h2>
 
       <?php if (!empty($message)) { ?>

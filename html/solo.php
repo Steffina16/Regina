@@ -18,7 +18,7 @@ $files = array_values($files); // reindex array
 <body>
 
 <div class="gallery-container">
-    <a href="../index.html#pictures" class="back-btn">← Back to Main</a>
+    <a href="../index.php#pictures" class="back-btn">← Back to Main</a>
     <div class="album-container">
         <h2 class="category-title">Solo Glamour ✨</h2>
 
@@ -44,6 +44,6 @@ $files = array_values($files); // reindex array
 <script>
   const images = <?php echo json_encode($files); ?>;
 </script>
-<script src="../js/solo.js"></script>
+<script src="../js/Solo.js"></script>
 </body>
 </html>

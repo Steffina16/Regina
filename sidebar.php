@@ -18,7 +18,7 @@
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <a href="../index.html">
+    <a href="../index.php">
       <div class="left"><i class="fas fa-home"></i> Home</div>
     </a>
     <a href="#" id="toggle-dark">

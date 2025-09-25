@@ -302,6 +302,7 @@
             padding: 40px;
             text-align: center;
             position: relative;
+            color: #3a3a3a;
         }
 
         .quiz-intro {
@@ -740,4 +741,42 @@
                 font-size: 0.95rem;
                 padding: 10px 25px;
             }
+        }
+        .login-btn {
+            position: absolute;
+            right: 30px; /* push to the right corner */
+            background: linear-gradient(135deg, #ff6b9a 0%, #d23c67 100%);
+            color: white !important;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(210, 60, 103, 0.3);
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #ff4785 0%, #c2185b 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(210, 60, 103, 0.4);
+        }
+
+                /* ensure the navbar is positioned so absolute children can use it */
+        .navbar { position: relative; }
+
+        /* put auth links to right */
+        .auth-links {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        }
+
+        /* small responsive tweak (so auth doesn't overlap on small screens) */
+        @media (max-width: 600px) {
+        .auth-links { position: static; transform: none; margin-left: auto; }
         }

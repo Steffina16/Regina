@@ -19,7 +19,7 @@ $files = array_values($files); // reindex array
   <?php include '../sidebar.php'; ?>
 
   <div class="gallery-container">
-    <a href="../index.html#pictures" class="back-btn">← Back to Main</a>
+    <a href="../index.php#pictures" class="back-btn">← Back to Main</a>
     <div class="album-container">
       <h2 class="category-title">Dine & Cherish 🍽️</h2>
 

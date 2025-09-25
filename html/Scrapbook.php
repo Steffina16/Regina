@@ -115,7 +115,7 @@
     <p class="footer">Made with love • And Code </p>
 
     <div class="return-btn">
-      <a href="../index.html#pictures">⬅ Return</a>
+      <a href="../index.php#pictures">⬅ Return</a>
     </div>
   </div>
 

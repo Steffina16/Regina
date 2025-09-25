@@ -187,3 +187,25 @@ body {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-bottom {
+  margin-top: auto; /* pushes logout to the bottom */
+  padding: 10px;
+}
+
+.sidebar-bottom a {
+  display: block;
+  padding: 10px;
+  color: #fff; /* match your theme */
+  text-decoration: none;
+}
+
+.sidebar-bottom a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

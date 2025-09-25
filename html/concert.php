@@ -5,13 +5,14 @@
   <title>Concert Scrapbook</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/concert.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
   <?php include '../sidebar.php'; ?>
 </head>
 <body>
   <div class="scrapbook">
     <!-- Back button -->
-    <a href="../index.html#pictures" class="back-btn">← Back to Main</a>
+    <a href="../index.php#pictures" class="back-btn">← Back to Main</a>
 
     <h1 class="title">Our Concert Scrapbook</h1>
 
@@ -66,5 +67,6 @@
   </div>
 
   <script src="../js/concert.js"></script>
+  <script src="../js/sidebar.js"></script>
 </body>
 </html>
