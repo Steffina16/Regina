@@ -86,9 +86,9 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <div class="category-previews">
-          <a href="html/cute.php?category=cute" class="category-preview">
-            <img src="albums/placeholder/picture ni chin-004.jpg" alt="Her Funny Moments">
-            <div class="preview-label">Her Joker Side</div>
+          <a href="html/favorites.php?category=favorites" class="category-preview">
+            <img src="albums/placeholder/picture ni chin-004.jpg" alt="Your Favorites">
+            <div class="preview-label">Favorites</div>
           </a>
           <a href="html/solo.php?category=Solo" class="category-preview">
             <img src="albums/placeholder/ganda.jpg" alt="Solo Pics">
@@ -109,6 +109,10 @@ if (session_status() === PHP_SESSION_NONE) {
           <a href="html/food.php?category=Yummyfoods" class="category-preview">
             <img src="albums/placeholder/inc.jpeg" alt="Food">
             <div class="preview-label">Shared Bites</div>
+          </a>
+          <a href="html/cute.php?category=cute" class="category-preview">
+            <img src="albums/placeholder/picture ni chin-004.jpg" alt="Her Funny Moments">
+            <div class="preview-label">Her Joker Side</div>
           </a>
         </div>
       </div>

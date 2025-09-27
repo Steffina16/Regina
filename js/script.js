@@ -136,7 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { question: "What's my favorite thing about you?", answers: ["Your smile", "Your kindness", "Your sense of humor", "All of the above"], correctAnswer: 3 },
         { question: "Where was our first date?", answers: ["Coffee shop", "Movie night", "Church event", "Dinner date"], correctAnswer: 3 },
         { question: "What's my first gift for you?", answers: ["Necklace", "Ballpen", "R5-15", "Bracelet"], correctAnswer: 3 },
-        { question: "What's my favorite food?", answers: ["Stir fry baguio beans", "Adobong baboy", "Pares", "Sinigang"], correctAnswer: 0 }
+        { question: "What's my favorite food?", answers: ["Stir fry baguio beans", "Adobong baboy", "Pares", "Sinigang"], correctAnswer: 0 },
+        { question: "What's my favorite", answers: ["Games", "Regina", "Food", "All of the above"], correctAnswer: 1 }
     ];
 
     let currentQuestion = 0;
