@@ -1,78 +1,79 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+    /* ===== Slideshow ===== */
     const slideshowWrapper = document.getElementById('slideshow-wrapper');
+    if (slideshowWrapper) {
+        const folder1 = [];
+        for (let i = 1; i <= 28; i++) folder1.push(`albums/ourpicture/Ourpicture-${String(i).padStart(3, '0')}.jpg`);
 
-    // ===== Slideshow =====
-    const folder1 = [];
-    for (let i = 1; i <= 28; i++) {
-        const num = String(i).padStart(3, '0');
-        folder1.push(`albums/ourpicture/Ourpicture-${num}.jpg`);
-    }
+        const folder2 = [];
+        for (let i = 1; i <= 228; i++) folder2.push(`albums/picture/picture-ni-chin-${String(i).padStart(3, '0')}.jpg`);
 
-    const folder2 = [];
-    for (let i = 1; i <= 228; i++) {
-        const num = String(i).padStart(3, '0');
-        folder2.push(`albums/picture/picture-ni-chin-${num}.jpg`);
-    }
+        const folder3 = [];
+        for (let i = 1; i <= 6; i++) folder3.push(`albums/Funnypic/Chin-${String(i).padStart(3, '0')}.jpg`);
 
-    const folder3 = [];
-    for (let i = 1; i <= 6; i++) {
-        const num = String(i).padStart(3, '0');
-        folder3.push(`albums/Funnypic/Chin-${num}.jpg`);
-    }
+        let imagePaths = [...folder1, ...folder2, ...folder3].sort(() => Math.random() - 0.5);
+        let currentIndex = 0;
 
-    let imagePaths = [...folder1, ...folder2, ...folder3];
-    imagePaths = imagePaths.sort(() => Math.random() - 0.5);
-
-    let currentIndex = 0;
-
-    function showNextSlide() {
-        slideshowWrapper.innerHTML = '';
-        for (let i = 0; i < 3; i++) {
-            const imgIndex = (currentIndex + i) % imagePaths.length;
-            const imgElement = document.createElement('img');
-            imgElement.src = imagePaths[imgIndex];
-            imgElement.style.flex = '1';
-            imgElement.style.width = '33.33%';
-            imgElement.style.height = '100%';
-            imgElement.style.objectFit = 'cover';
-            imgElement.style.transition = 'opacity 0.5s ease-in-out';
-            slideshowWrapper.appendChild(imgElement);
+        function showNextSlide() {
+            slideshowWrapper.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const imgIndex = (currentIndex + i) % imagePaths.length;
+                const img = document.createElement('img');
+                img.src = imagePaths[imgIndex];
+                img.style.flex = '1';
+                img.style.width = '33.33%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                img.style.transition = 'opacity 0.5s ease-in-out';
+                slideshowWrapper.appendChild(img);
+            }
+            currentIndex = (currentIndex + 3) % imagePaths.length;
         }
-        currentIndex = (currentIndex + 3) % imagePaths.length;
+
+        showNextSlide();
+        setInterval(showNextSlide, 5000);
     }
 
-    showNextSlide();
-    setInterval(showNextSlide, 5000);
-
-    // ===== Dropdown toggle =====
+    /* ===== Regular Dropdown (Message Icon) ===== */
     const dropBtn = document.querySelector(".dropbtn");
     const dropdown = document.querySelector(".dropdown");
-
     if (dropBtn) {
         dropBtn.addEventListener("click", function(e) {
             e.stopPropagation();
             dropdown.classList.toggle("show");
         });
     }
-
     window.addEventListener("click", function(event) {
         if (!event.target.closest(".dropdown")) {
-            dropdown.classList.remove("show");
+            dropdown?.classList.remove("show");
         }
     });
 
-    // ===== SPA Navigation =====
+    /* ===== Profile Dropdown (Avatar Menu) ===== */
+    const profileBtn = document.getElementById("profileBtn");
+    const profileMenu = document.getElementById("profileMenu");
+
+    if (profileBtn && profileMenu) {
+        profileBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            profileMenu.classList.toggle("show");
+        });
+
+        window.addEventListener("click", function (event) {
+            if (!event.target.closest(".profile-dropdown")) {
+                profileMenu.classList.remove("show");
+            }
+        });
+    }
+
+    /* ===== SPA Navigation ===== */
     const navLinks = document.querySelectorAll('.navbar a[data-target]');
     const contentSections = document.querySelectorAll('.content-section');
 
-    contentSections.forEach(section => {
-        section.style.display = section.classList.contains('active-section') ? 'block' : 'none';
-    });
-
     function showSection(targetId) {
-        const targetSection = document.getElementById(targetId);
-        if (!targetSection) return;
+        const target = document.getElementById(targetId);
+        if (!target) return;
 
         navLinks.forEach(link => link.classList.remove('active-link'));
         contentSections.forEach(section => {
@@ -80,14 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.display = 'none';
         });
 
-        const matchingLink = document.querySelector(`.navbar a[data-target="${targetId}"]`);
-        if (matchingLink) matchingLink.classList.add('active-link');
+        const matching = document.querySelector(`.navbar a[data-target="${targetId}"]`);
+        if (matching) matching.classList.add('active-link');
 
-        targetSection.classList.add('active-section');
-        targetSection.style.display = 'block';
-
-        if (targetId === 'pictures') initializePictureCategories();
-        else if (targetId === 'quiz') resetQuiz();
+        target.classList.add('active-section');
+        target.style.display = 'block';
     }
 
     navLinks.forEach(link => {
@@ -102,35 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const initialHash = window.location.hash.replace('#', '');
     if (initialHash) showSection(initialHash);
+    else if (contentSections.length) contentSections[0].style.display = 'block';
 
-    // ===== Allow normal navigation for dropdown links =====
-    const dropdownLinks = document.querySelectorAll('.dropdown-content a');
-    dropdownLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            dropdown.classList.remove('show'); // close dropdown
-            // normal navigation happens automatically
-        });
-    });
-
-    // ===== Pictures =====
-    function initializePictureCategories() {
-        const categoryLinks = document.querySelectorAll('[data-category]');
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const category = this.getAttribute('data-category');
-                loadPictureCategory(category);
-            });
-        });
-        loadPictureCategory('cute');
-    }
-
-    function loadPictureCategory(category) {
-        console.log(`Loading ${category} pictures`);
-        // Add your gallery logic here
-    }
-
-    // ===== Quiz =====
+    /* ===== Quiz Logic ===== */
     const quizQuestions = [
         { question: "Where did we first meet?", answers: ["At church", "In school", "Through mutual friends", "Social Media"], correctAnswer: 0 },
         { question: "What's my favorite thing about you?", answers: ["Your smile", "Your kindness", "Your sense of humor", "All of the above"], correctAnswer: 3 },
@@ -142,32 +114,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentQuestion = 0;
     let score = 0;
+    const startQuizBtn = document.getElementById('start-quiz');
+    const quizContainer = document.getElementById('quiz-questions');
+    const quizResults = document.getElementById('quiz-results');
 
-    const quizSection = document.getElementById('quiz');
-    if (quizSection) document.getElementById('start-quiz').addEventListener('click', startQuiz);
+    if (startQuizBtn) startQuizBtn.addEventListener('click', startQuiz);
 
     function startQuiz() {
         currentQuestion = 0;
         score = 0;
         document.querySelector('.quiz-intro').classList.add('hidden');
-        document.getElementById('quiz-questions').classList.remove('hidden');
+        quizContainer.classList.remove('hidden');
         showQuestion();
     }
 
     function showQuestion() {
-        const questionContainer = document.getElementById('quiz-questions');
-        const question = quizQuestions[currentQuestion];
-        
-        questionContainer.innerHTML = `
+        const q = quizQuestions[currentQuestion];
+        quizContainer.innerHTML = `
             <div class="question">
-                <h2 class="question-text">${question.question}</h2>
-                ${question.answers.map((answer, index) => `
-                    <button class="answer-option" onclick="selectAnswer(${index})">
-                        ${answer}
-                    </button>
-                `).join('')}
-            </div>
-        `;
+                <h2 class="question-text">${q.question}</h2>
+                ${q.answers.map((a, i) => `<button class="answer-option" onclick="selectAnswer(${i})">${a}</button>`).join('')}
+            </div>`;
     }
 
     window.selectAnswer = function(answerIndex) {
@@ -178,27 +145,25 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function showResults() {
-        const quizContainer = document.getElementById('quiz-questions');
         quizContainer.classList.add('hidden');
-        const resultsContainer = document.getElementById('quiz-results');
-        resultsContainer.classList.remove('hidden');
-        const percentage = Math.round((score / quizQuestions.length) * 100);
-        resultsContainer.innerHTML = `
+        quizResults.classList.remove('hidden');
+        const percent = Math.round((score / quizQuestions.length) * 100);
+        quizResults.innerHTML = `
             <h2>Quiz Complete!</h2>
-            <p>You scored ${score} out of ${quizQuestions.length} (${percentage}%)</p>
-            <p>${getResultMessage(percentage)}</p>
+            <p>You scored ${score} out of ${quizQuestions.length} (${percent}%)</p>
+            <p>${getResultMessage(percent)}</p>
             <button onclick="resetQuiz()" class="quiz-button">Try Again</button>
         `;
     }
 
-    function getResultMessage(percentage) {
-        if (percentage >= 90) return "Wow perfect mahal na mahal talaga naten ang isa't isa <3";
-        else if (percentage >= 50) return "Bakit may Mali, Hindi mo bako mahal?";
+    function getResultMessage(pct) {
+        if (pct >= 90) return "Wow perfect mahal na mahal talaga naten ang isa't isa <3";
+        else if (pct >= 50) return "Bakit may Mali, Hindi mo bako mahal?";
         else return "Siguro May Iba Kana :<";
     }
 
     window.resetQuiz = function() {
-        document.getElementById('quiz-results').classList.add('hidden');
+        quizResults.classList.add('hidden');
         document.querySelector('.quiz-intro').classList.remove('hidden');
     };
 });
