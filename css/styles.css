@@ -936,3 +936,86 @@
         min-width: 150px;
         }
         .profile-menu.show { display: block; }
+        /* 🏠 Home Icon Style */
+        .home-icon {
+        color: #66384a;
+        font-size: 1.7rem;
+        padding: 10px;
+        border-radius: 10px;
+        transition: all 0.25s ease;
+        }
+
+        .home-icon:hover i {
+        color: #ff4b91;
+        transform: scale(1.2);
+        text-shadow: 0 0 8px rgba(255, 75, 145, 0.6);
+        }
+
+
+        /* 📝 Post Section (Facebook Style) */
+.post-container {
+  width: 80%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 30px auto;
+  padding: 15px;
+}
+
+.post-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+}
+
+.post-input:focus {
+  border-color: #d23c67;
+}
+
+.post-bottom {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.post-option {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s;
+}
+
+.post-option:hover {
+  color: #d23c67;
+}
+
+.feed-placeholder {
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+  font-size: 15px;
+}

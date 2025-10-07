@@ -27,7 +27,9 @@ $avatarPath = !empty($user['avatar']) ? $user['avatar'] : "albums/avatar/default
   <link rel="stylesheet" href="../css/profile.css"> <!-- profile-specific -->
   <link rel="icon" type="image/x-icon" href="../albums/placeholder/logo.png">
 </head>
-<body>
+<body>  
+
+<a href="../index.php#pictures" class="back-btn">← Back to Main</a>
 
 <div class="profile-container">
   <img src="../<?= htmlspecialchars($avatarPath) ?>" alt="Avatar" class="profile-avatar">
@@ -40,6 +42,5 @@ $avatarPath = !empty($user['avatar']) ? $user['avatar'] : "albums/avatar/default
     <a href="logout.php" class="logout-btn">Logout</a>
   </div>
 </div>
-
 </body>
 </html>
