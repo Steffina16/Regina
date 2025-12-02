@@ -1,69 +1,59 @@
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('slideshowImages:', window.slideshowImages);
 
     /* ===== Slideshow ===== */
     const slideshowWrapper = document.getElementById('slideshow-wrapper');
-    if (slideshowWrapper) {
-        const folder1 = [];
-        for (let i = 1; i <= 28; i++) folder1.push(`albums/ourpicture/Ourpicture-${String(i).padStart(3, '0')}.jpg`);
-
-        const folder2 = [];
-        for (let i = 1; i <= 228; i++) folder2.push(`albums/picture/picture-ni-chin-${String(i).padStart(3, '0')}.jpg`);
-
-        const folder3 = [];
-        for (let i = 1; i <= 6; i++) folder3.push(`albums/Funnypic/Chin-${String(i).padStart(3, '0')}.jpg`);
-
-        let imagePaths = [...folder1, ...folder2, ...folder3].sort(() => Math.random() - 0.5);
-        let currentIndex = 0;
-
-        function showNextSlide() {
-            slideshowWrapper.innerHTML = '';
-            for (let i = 0; i < 3; i++) {
-                const imgIndex = (currentIndex + i) % imagePaths.length;
-                const img = document.createElement('img');
-                img.src = imagePaths[imgIndex];
-                img.style.flex = '1';
-                img.style.width = '33.33%';
-                img.style.height = '100%';
-                img.style.objectFit = 'cover';
-                img.style.transition = 'opacity 0.5s ease-in-out';
-                slideshowWrapper.appendChild(img);
-            }
-            currentIndex = (currentIndex + 3) % imagePaths.length;
+    if (slideshowWrapper && window.slideshowImages && window.slideshowImages.length) {
+        // clone image list and shuffle it randomly
+        const imagePaths = [...window.slideshowImages];
+        for (let i = imagePaths.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [imagePaths[i], imagePaths[j]] = [imagePaths[j], imagePaths[i]];
         }
 
-        showNextSlide();
-        setInterval(showNextSlide, 5000);
+        // clear existing slides
+        slideshowWrapper.innerHTML = '';
+
+        // display only the first 3 shuffled images
+        const showCount = Math.min(3, imagePaths.length);
+        for (let i = 0; i < showCount; i++) {
+            const img = document.createElement('img');
+            img.src = imagePaths[i];
+            img.style.flex = '1';
+            img.style.width = '33.33%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '10px';
+            img.style.transition = 'opacity 0.5s ease-in-out';
+            slideshowWrapper.appendChild(img);
+        }
+    } else {
+        console.warn('No slideshow images found or slideshow wrapper missing.');
     }
 
-    /* ===== Regular Dropdown (Message Icon) ===== */
+    /* ===== Dropdowns ===== */
     const dropBtn = document.querySelector(".dropbtn");
     const dropdown = document.querySelector(".dropdown");
     if (dropBtn) {
-        dropBtn.addEventListener("click", function(e) {
+        dropBtn.addEventListener("click", e => {
             e.stopPropagation();
             dropdown.classList.toggle("show");
         });
     }
-    window.addEventListener("click", function(event) {
-        if (!event.target.closest(".dropdown")) {
-            dropdown?.classList.remove("show");
-        }
+    window.addEventListener("click", e => {
+        if (!e.target.closest(".dropdown")) dropdown?.classList.remove("show");
     });
 
-    /* ===== Profile Dropdown (Avatar Menu) ===== */
+    /* ===== Profile Menu ===== */
     const profileBtn = document.getElementById("profileBtn");
     const profileMenu = document.getElementById("profileMenu");
-
     if (profileBtn && profileMenu) {
-        profileBtn.addEventListener("click", function (e) {
+        profileBtn.addEventListener("click", e => {
             e.stopPropagation();
             profileMenu.classList.toggle("show");
         });
-
-        window.addEventListener("click", function (event) {
-            if (!event.target.closest(".profile-dropdown")) {
-                profileMenu.classList.remove("show");
-            }
+        window.addEventListener("click", e => {
+            if (!e.target.closest(".profile-dropdown")) profileMenu.classList.remove("show");
         });
     }
 
@@ -76,33 +66,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!target) return;
 
         navLinks.forEach(link => link.classList.remove('active-link'));
-        contentSections.forEach(section => {
-            section.classList.remove('active-section');
-            section.style.display = 'none';
+        contentSections.forEach(sec => {
+            sec.classList.remove('active-section');
+            sec.style.display = 'none';
         });
 
-        const matching = document.querySelector(`.navbar a[data-target="${targetId}"]`);
-        if (matching) matching.classList.add('active-link');
+        const matchingLink = document.querySelector(`.navbar a[data-target="${targetId}"]`);
+        if (matchingLink) matchingLink.classList.add('active-link');
 
         target.classList.add('active-section');
         target.style.display = 'block';
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', e => {
             e.preventDefault();
-            const targetId = this.getAttribute('data-target');
+            const targetId = link.getAttribute('data-target');
             if (!targetId) return;
             showSection(targetId);
             history.pushState(null, '', `#${targetId}`);
         });
     });
 
-    const initialHash = window.location.hash.replace('#', '');
+    const initialHash = window.location.hash.replace('#','');
     if (initialHash) showSection(initialHash);
     else if (contentSections.length) contentSections[0].style.display = 'block';
 
-    /* ===== Quiz Logic ===== */
+    /* ===== Quiz ===== */
     const quizQuestions = [
         { question: "Where did we first meet?", answers: ["At church", "In school", "Through mutual friends", "Social Media"], correctAnswer: 0 },
         { question: "What's my favorite thing about you?", answers: ["Your smile", "Your kindness", "Your sense of humor", "All of the above"], correctAnswer: 3 },
@@ -114,11 +104,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentQuestion = 0;
     let score = 0;
-    const startQuizBtn = document.getElementById('start-quiz');
+    const startBtn = document.getElementById('start-quiz');
     const quizContainer = document.getElementById('quiz-questions');
     const quizResults = document.getElementById('quiz-results');
 
-    if (startQuizBtn) startQuizBtn.addEventListener('click', startQuiz);
+    if (startBtn) startBtn.addEventListener('click', startQuiz);
 
     function startQuiz() {
         currentQuestion = 0;
@@ -133,16 +123,20 @@ document.addEventListener('DOMContentLoaded', function() {
         quizContainer.innerHTML = `
             <div class="question">
                 <h2 class="question-text">${q.question}</h2>
-                ${q.answers.map((a, i) => `<button class="answer-option" onclick="selectAnswer(${i})">${a}</button>`).join('')}
-            </div>`;
+                ${q.answers.map((a,i)=>`<button class="answer-option">${a}</button>`).join('')}
+            </div>
+        `;
+        quizContainer.querySelectorAll('.answer-option').forEach((btn,i) => {
+            btn.addEventListener('click', () => selectAnswer(i));
+        });
     }
 
-    window.selectAnswer = function(answerIndex) {
+    function selectAnswer(answerIndex) {
         if (answerIndex === quizQuestions[currentQuestion].correctAnswer) score++;
         currentQuestion++;
         if (currentQuestion < quizQuestions.length) showQuestion();
         else showResults();
-    };
+    }
 
     function showResults() {
         quizContainer.classList.add('hidden');
@@ -166,4 +160,52 @@ document.addEventListener('DOMContentLoaded', function() {
         quizResults.classList.add('hidden');
         document.querySelector('.quiz-intro').classList.remove('hidden');
     };
+
+    /* ===== Delete Post Modal ===== */
+    const deleteModal = document.getElementById("deleteModal");
+    const cancelBtn = document.getElementById("cancelDelete");
+    const confirmBtn = document.getElementById("confirmDelete");
+    let selectedPostId = null;
+
+    document.querySelectorAll('.trigger-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedPostId = btn.dataset.postId;
+            deleteModal.style.display = 'flex';
+        });
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        selectedPostId = null;
+        deleteModal.style.display = 'none';
+    });
+
+    confirmBtn.addEventListener('click', () => {
+        if (!selectedPostId) return;
+        fetch('api/delete_post.php', {
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            body: 'post_id=' + encodeURIComponent(selectedPostId)
+        }).then(() => location.reload());
+    });
+
+    window.addEventListener('click', e => {
+        if (e.target === deleteModal) {
+            selectedPostId = null;
+            deleteModal.style.display = 'none';
+        }
+    });
+
+    /* ===== Options Menu (3 dots) ===== */
+    document.querySelectorAll('.options-icon').forEach(icon => {
+        icon.addEventListener('click', e => {
+            e.stopPropagation();
+            const container = icon.closest('.options-container');
+            container.classList.toggle('show');
+        });
+    });
+
+    window.addEventListener('click', () => {
+        document.querySelectorAll('.options-container').forEach(c => c.classList.remove('show'));
+    });
+
 });
